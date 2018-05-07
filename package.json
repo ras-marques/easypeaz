@@ -1,0 +1,29 @@
+{
+  "name": "easypeaz",
+  "version": "1.0.0",
+  "description": "Available ingredients based recipe search in a website.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ras-marques/easypeaz.git"
+  },
+  "keywords": [
+    "recipe",
+    "search"
+  ],
+  "author": "Ruben Marques",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ras-marques/easypeaz/issues"
+  },
+  "homepage": "https://github.com/ras-marques/easypeaz#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "http": "0.0.0",
+    "socket.io": "^2.1.0"
+  }
+}
