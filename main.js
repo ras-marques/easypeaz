@@ -3,6 +3,7 @@
 var express = require('express');
 var app = express();
 const bodyParser = require("body-parser");
+var fs = require('fs');
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -23,9 +24,20 @@ app.get('/add_recipes', function(req, res) {
 });
 
 app.post('/add_recipes', function(req, res) {
-    var recipe = req.body.recipe;
-    var tuna = req.body.tuna;
-    console.log(recipe)
+    var recipe = {name: req.body.recipe_name, link: req.body.recipe_link, ingredients: []};
+    var data = req.body;
+    for(var key in data){
+        if(key != "recipe_name" && key != "recipe_link"){
+            recipe.ingredients.push(key);
+        }
+    }
+    var myJSON = JSON.stringify(recipe);
+    fs.writeFile("test.txt", myJSON, function(err) {
+        if (err) {
+            console.log(err);
+        }
+    });
+    console.log(myJSON);
 });
 
 app.listen(3000);
