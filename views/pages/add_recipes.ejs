@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<% include ../partials/head %>
+</head>
+<body class="container">
+	<header>
+		<% include ../partials/header %>
+	</header>
+
+	<main>
+		<form action="/add_recipes" method="post">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="recipe">Recipe name:</label>
+						<input type="text" class="form-control" name="recipe_name">
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="recipe">Recipe link:</label>
+						<input type="text" class="form-control" name="recipe_link">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-1">
+					<table>
+						<thead>Meats</thead>
+						<tbody>
+							<tr><div class="checkbox"><label><input type="checkbox" name="beef_roast"> Beef roast</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="beef_steak"> Beef steak</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="ground_beef"> Ground beef</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="pork_roast"> Pork roast</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="pork_chops"> Pork chops</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="bacon"> Bacon</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="ham"> ham</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="ground_pork"> Ground pork</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="whole_chicken"> Whole chicken</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="chicken_breast"> Chicken breast</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="chicken_legs"> Chicken legs</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="chicken_wings"> Chicken wings</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="ground_chicken"> Ground chicken</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="whole_turkey"> Whole turkey</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="turkey_breast"> Turkey breast</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="turkey_leg"> Turkey leg</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="ground_turkey"> Ground turkey</label></div></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-1">
+					<table>
+						<thead>Fish</thead>
+						<tbody>
+							<tr><div class="checkbox"><label><input type="checkbox" name="salmon_fillets"> Salmon fillets</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="smoked_salmon"> Smoked salmon</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="canned_tuna"> Canned tuna</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="tuna_steak"> Tuna steak</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="sardines"> Sardines</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="canned_sardines"> Canned sardines</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="eel"> Eel</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="carp"> Carp</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="gilt_head_bream"> Gilt-head bream</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="beluga"> Beluga</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="swordfish"> Swordfish</label></div></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-1">
+					<table>
+						<thead>Seafood</thead>
+						<tbody>
+							<tr><div class="checkbox"><label><input type="checkbox" name="crab"> Crab</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="lobster"> Lobster</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="squid"> Squid</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="calamari"> Calamari</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="prawn"> Prawn</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="shrimp"> Shrimp</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="oyster"> Oyster</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="sea_urchin"> Sea urchin</label></div></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-1">
+					<table>
+						<thead>Dairy</thead>
+						<tbody>
+							<tr><div class="checkbox"><label><input type="checkbox" name="eggs"> Eggs</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="butter"> Butter</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="milk"> Milk</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="condensed_milk"> Condensed milk</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="powdered_milk"> Powdered milk</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="yogurt"> Yogurt</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="ice_cream"> Ice cream</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="whipped_cream"> Whipped cream</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="cream_cheese"> Cream cheese</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="brie_cheese"> Brie cheese</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="mozzarella_cheese"> Mozzarella cheese</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="swiss_cheese"> Swiss cheese</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="goat_cheese"> Goat cheese</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="blue_cheese"> Blue cheese</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="cottage_cheese"> Cottage cheese</label></div></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-1">
+					<table>
+						<thead>Dairy alternatives</thead>
+						<tbody>
+							<tr><div class="checkbox"><label><input type="checkbox" name="almond_milk"> Almond milk</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="oat_milk"> Oat milk</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="coconut_milk"> Coconut milk</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="soy_milk"> Soy milk</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="rice_milk"> Rice milk</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="hemp_milk"> Hemp milk</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="margarine"> Margarine</label></div></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-1">
+					<table>
+						<thead>Vegetables</thead>
+						<tbody>
+						<tr><div class="checkbox"><label><input type="checkbox" name="onion"> Onion</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="tomato"> Tomato</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="potato"> Potato</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="sweet_potato"> Sweet potato</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="yam"> Yam</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="carrot"> Carrot</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="corn"> Corn</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="sweet_corn"> Sweet corn</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="cucumber"> Cucumber</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="zucchini"> Zucchini</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="eggplant"> Eggplant</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="pumpkin"> Pumpkin</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="green beans"> Green beans</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="garlic"> Garlic</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="avocado"> Avocado</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="spinach"> Spinach</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="cauliflower"> Cauliflower</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="cabbage"> Cabbage</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="bell_pepper"> Bell pepper</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="broccoli"> Broccoli</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="mushroom"> Mushroom</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="asparagus"> Asparagus</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="scallion"> Scallion</label></div></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-1">
+					<table>
+						<thead>Fruits</thead>
+						<tbody>
+							<tr><div class="checkbox"><label><input type="checkbox" name="apple"> Apple</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="orange"> Orange</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="tangerine"> Tangerine</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="clementine"> Clementine</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="grapefruit"> Grapefruit</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="lemon"> Lemon</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="lime"> Lime</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="passion_fruit"> Passion fruit</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="banana"> Banana</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="mango"> Mango</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="papaya"> Papaya</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="kiwi"> Kiwi</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="strawberry"> Strawberry</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="raspberry"> Raspberry</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="blueberry"> Blueberry</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="blackberry"> Blackberry</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="grapes"> Grapes</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="raisins"> Raisins</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="coconut"> Coconut</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="peach"> Peach</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="canned_peach"> Canned peach</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="pineapple"> Pineapple</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="canned_pineapple"> Canned pineapple</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="watermelon"> Watermelon</label></div></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-1">
+					<table>
+						<thead>Grains and Baking</thead>
+						<tbody>
+						<tr><div class="checkbox"><label><input type="checkbox" name="wheat"> Wheat</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="flour"> Flour</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="rice"> Rice</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="brown_rice"> Brown rice</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="rice_flour"> Rice flour</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="quick_oats"> Quick oats</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="steel_cut_oats"> Steel-cut oats</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="rolled_oats"> Rolled oats</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="quinoa"> Quinoa</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="pasta"> Pasta</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="couscous"> Couscous</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="pizza_dough"> Pizza dough</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="coconut_flour"> Coconut flour</label></div></tr>
+						<tr><div class="checkbox"><label><input type="checkbox" name="gnocchi"> Gnocchi</label></div></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-1">
+					<table>
+						<thead>Seasoning</thead>
+						<tbody>
+							<tr><div class="checkbox"><label><input type="checkbox" name="vinegar"> Vinegar</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="salt"> Salt</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="pepper"> Pepper</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="parsley"> Parsley</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="coriander"> Coriander</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="lavander"> Lavander</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="rosemary"> Rosemary</label></div></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-1">
+					<table>
+						<thead>Oils</thead>
+						<tbody>
+							<tr><div class="checkbox"><label><input type="checkbox" name="olive_oil"> Olive oil</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="vegetable_oil"> Vegetable oil</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="coconut_oil"> Coconut oil</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="almond_oil"> Almond oil</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="palm_oil"> Palm oil</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="sunflower_oil"> Sunflower oil</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="sesame_oil"> Sesame oil</label></div></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-1">
+					<table>
+						<thead>Sweets</thead>
+						<tbody>
+							<tr><div class="checkbox"><label><input type="checkbox" name="sugar"> Sugar</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="caramel"> Caramel</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="dark_chocolate"> Dark chocolate</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="chocolate"> Chocolate</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="white_chocolate"> White chocolate</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="marshmallow"> Marshmallow</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="gummies"> Gummies</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="nutella"> Nutella</label></div></tr>
+							<tr><div class="checkbox"><label><input type="checkbox" name="oreo"> Oreo</label></div></tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</main>
+
+	<footer>
+		<% include ../partials/footer %>
+	</footer>
+
+</body>
+</html>
