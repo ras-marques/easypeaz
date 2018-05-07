@@ -17,7 +17,10 @@ chmod 600 .vimrc
 
 echo "export EDITOR=vim" >> /etc/profile
 
-npm install -g heroku
+wget https://nodejs.org/dist/v8.11.1/node-v8.11.1-linux-armv6l.tar.xz
+tar -xvf node-v8.11.1-linux-armv6l.tar.xz
+cp -R node-v8.11.1-linux-armv6l/* /usr/local/
+rm -r node-v8.*
 
 reboot
 
