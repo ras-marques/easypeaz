@@ -19,20 +19,67 @@ app.get('/', function(req, res) {
 });
 
 // add recipes page
-app.get('/add_recipes', function(req, res) {
-    res.render('pages/add_recipes');
+app.get('/add', function(req, res) {
+    res.render('pages/add');
 });
 
-app.post('/print_stored_json', function(req, res) {
+app.get('/recipes.json', function(req, res) {
     var recipes;
     fs.readFile('recipes.json', 'utf8', function (err, data) {
         if (err) throw err;
         recipes = JSON.parse(data);
-        console.log(recipes);
+        //console.log(recipes);
+        res.json(recipes);
     });
 });
 
-app.post('/add_recipes', function(req, res) {
+// all recipes page
+app.get('/show_all', function(req, res) {
+    res.render('pages/show_all');
+});
+
+function inArray(elem,array_to_check){
+    var count=array_to_check.length;
+    for(var i=0;i<count;i++){
+        if(array_to_check[i]===elem){return true;}
+    }
+    return false;
+}
+
+app.post('/search_result', function(req, res) {
+    var checked_ingredients_json = req.body;
+    //console.log(checked_ingredients_json)
+    checked_ingredients_array=[];
+    for(var ingredient in checked_ingredients_json){
+        checked_ingredients_array.push(ingredient);
+    }
+    //console.log(checked_ingredients_array)
+
+    var recipes_to_send = {}
+    var fs = require('fs');
+    fs.readFile('recipes.json', 'utf8', function (err, data) {
+        if (err) throw err;
+        var recipes_list = JSON.parse(data);
+        for (var recipe in recipes_list) {
+            var recipe_valid = true;
+            for (var i = 0; i < recipes_list[recipe]["ingredients"].length; i++) {
+                if (!inArray(recipes_list[recipe]["ingredients"][i], checked_ingredients_array)) {
+                    recipe_valid = false
+                }
+            }
+            if (recipe_valid) {
+                recipes_to_send[recipe]={"recipe_link": recipes_list[recipe]["recipe_link"]}
+            }
+        }
+        //var myJSON = JSON.stringify(recipes_to_send);
+        //console.log(recipes_to_send);
+        res.json(recipes_to_send);
+        //res.render('pages/search_result');
+    });
+});
+
+// add recipes page
+app.post('/add', function(req, res) {
     var data = req.body;
     var new_recipe_name = data.recipe_name;
     var new_recipe_link = data.recipe_link;
@@ -49,7 +96,7 @@ app.post('/add_recipes', function(req, res) {
         if (err) throw err;
         recipes = JSON.parse(data);
 
-        recipes[new_recipe_name] = {"link": new_recipe_link, "ingredients": new_recipe_ingredients}
+        recipes[new_recipe_name] = {"recipe_link": new_recipe_link, "ingredients": new_recipe_ingredients}
         var myJSON = JSON.stringify(recipes);
 
         fs.writeFile("recipes.json", myJSON, function(err) {
@@ -58,24 +105,8 @@ app.post('/add_recipes', function(req, res) {
             }
         });
 
-        console.log(recipes);
+        //console.log(recipes);
     });
-    /*
-    var recipes;
-    fs.readFile('recipes.json', 'utf8', function (err, data) {
-        if (err) throw err;
-        recipes = JSON.parse(data);
-        console.log(recipes);
-    });
-
-    console.log(new_recipe_name);
-    recipes.new_recipe_name=new_recipe;
-    var recipes_stringified = JSON.stringify(recipes);
-    fs.writeFile("recipes.json", recipes_stringified, function(err) {
-        if (err) {
-            console.log(err);
-        }
-    });*/
 });
 
 app.listen(3000);

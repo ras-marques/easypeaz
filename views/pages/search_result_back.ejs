@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<% include ../partials/head %>
+</head>
+<body class="container">
+
+	<header>
+		<% include ../partials/header %>
+	</header>
+
+	<main>
+		<!--style="width:100%"-->
+		<table id="table_of_results">
+			<tr>
+				<td>Recipe name</td>
+				<td>Recipe link</td>
+			</tr>
+		</table>
+	</main>
+
+	<footer>
+		<% include ../partials/footer %>
+	</footer>
+
+	<script>
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var table = document.getElementById("table_of_results");
+                var myObj = JSON.parse(this.responseText);
+                for(var key in myObj){
+                    //console.log(key);
+                    //console.log(myObj[key].recipe_link);
+                    var row_number = document.getElementById("table_of_results").rows.length;
+                    var row = table.insertRow(row_number);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    cell1.innerHTML = key;
+                    cell2.innerHTML = myObj[key].recipe_link;
+                }
+            }
+
+
+            //document.getElementById("table_of_results").innerHTML += '</table>'
+        };
+        xmlhttp.open("GET", "recipes.json", true);
+        xmlhttp.send();
+	</script>
+</body>
+</html>

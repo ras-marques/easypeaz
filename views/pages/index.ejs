@@ -10,11 +10,11 @@
 	</header>
 
 	<main>
-		<div class="jumbotron">
+		<div id="splash" class="jumbotron">
 			<h1 class="text-center">Finding recipes is EasyPeaZ</h1>
 			<p class="text-center">Just mark what you have currently available and we will show you compatible recipes!</p>
 		</div>
-		<div class="container">
+		<div id="selectors" class="container">
 			<div class="row">
 				<div class="col-sm-5"></div>
 				<div class="col-sm-1">
@@ -26,7 +26,7 @@
 				<div class="col-sm-5"></div>
 			</div>
 		</div>
-		<form action="/search_recipe" method="post">
+		<form id="search_recipe">
 			<div class="row">
 				<div class="col-sm-1">
 					<table>
@@ -248,16 +248,17 @@
 					</table>
 				</div>
 			</div>
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-5"></div>
-					<div class="col-sm-2">
-						<button type="submit" class="btn btn-default">Search recipe</button>
+		</form>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-5"></div>
+				<div class="col-sm-2">
+					<button id="search_button" type="button" class="btn btn-default" onclick="postData()">Search recipe</button>
 					</div>
 					<div class="col-sm-5"></div>
-				</div>
 			</div>
-		</form>
+		</div>
+		<div><table id="table_of_results"></table></div>
 	</main>
 
 	<footer>
@@ -271,6 +272,54 @@
 			else{
                 $('input:checkbox').not(this).prop('checked', false);
 			}
+        }
+        function postData() {
+            var xmlhttp=new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange=function(){
+                if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                    var table = document.getElementById("table_of_results");
+                    var myObj = JSON.parse(xmlhttp.responseText);
+                    //console.log(myObj)
+                    var row = table.insertRow(0);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    cell1.innerHTML = "Recipe name";
+                    cell2.innerHTML = "Recipe link";
+                    for(var key in myObj){
+                        //console.log(key);
+                        //console.log(myObj[key].recipe_link);
+                        var row_number = document.getElementById("table_of_results").rows.length;
+                        var row = table.insertRow(row_number);
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        cell1.innerHTML = key;
+                        cell2.innerHTML = myObj[key].recipe_link;
+                    }
+                    var elem = document.getElementById('splash');
+					elem.parentNode.removeChild(elem);
+					var elem = document.getElementById('selectors');
+					elem.parentNode.removeChild(elem);
+					var elem = document.getElementById('search_recipe');
+					elem.parentNode.removeChild(elem);
+                    var elem = document.getElementById('search_button');
+                    elem.parentNode.removeChild(elem);
+                    //document.getElementById("result").innerHTML=xmlhttp.responseText;
+                }
+            }
+
+            var url = "search_result";
+            var checkBoxes_formData = new FormData(document.getElementById("search_recipe"));
+            var checkBoxes_formData_objectified = {};
+            for (var pair of checkBoxes_formData.entries()) {
+                checkBoxes_formData_objectified[pair[0].toString()] = pair[1];
+            }
+            //console.log(checkBoxes_formData_objectified);
+            var myJSON = JSON.stringify(checkBoxes_formData_objectified);
+            //console.log(myJSON);
+            xmlhttp.open("POST",url,true);
+            xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xmlhttp.send(myJSON);
         }
 	</script>
 </body>
