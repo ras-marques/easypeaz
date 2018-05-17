@@ -321,7 +321,9 @@
 					<div class="col-sm-5"></div>
 			</div>
 		</div>
-		<div><table id="table_of_results"></table></div>
+		<div id="results" style="text-align: center">
+
+		</div>
 	</main>
 
 	<footer>
@@ -339,25 +341,14 @@
         function postData() {
             var xmlhttp=new XMLHttpRequest();
 
-            xmlhttp.onreadystatechange=function(){
-                if (xmlhttp.readyState==4 && xmlhttp.status==200){
-                    var table = document.getElementById("table_of_results");
-                    var myObj = JSON.parse(xmlhttp.responseText);
-                    //console.log(myObj)
-                    var row = table.insertRow(0);
-                    var cell1 = row.insertCell(0);
-                    var cell2 = row.insertCell(1);
-                    cell1.innerHTML = "Recipe name";
-                    cell2.innerHTML = "Recipe link";
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var div=document.getElementById("results");
+                    div.innerHTML="";
+                    var myObj = JSON.parse(this.responseText);
+                    console.log(myObj)
                     for(var key in myObj){
-                        //console.log(key);
-                        //console.log(myObj[key].recipe_link);
-                        var row_number = document.getElementById("table_of_results").rows.length;
-                        var row = table.insertRow(row_number);
-                        var cell1 = row.insertCell(0);
-                        var cell2 = row.insertCell(1);
-                        cell1.innerHTML = key;
-                        cell2.innerHTML = myObj[key].recipe_link;
+                        div.innerHTML+="<p><a href=\""+myObj[key].recipe_link+"\">"+key+"</a></p>";
                     }
                     var elem = document.getElementById('splash');
 					elem.parentNode.removeChild(elem);
