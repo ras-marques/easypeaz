@@ -28,8 +28,16 @@ app.get('/recipes.json', function(req, res) {
     fs.readFile('recipes.json', 'utf8', function (err, data) {
         if (err) throw err;
         recipes = JSON.parse(data);
-        //console.log(recipes);
         res.json(recipes);
+    });
+});
+
+app.get('/ingredients.json', function(req, res) {
+    var ingredients;
+    fs.readFile('ingredients.json', 'utf8', function (err, data) {
+        if (err) throw err;
+        ingredients = JSON.parse(data);
+        res.json(ingredients);
     });
 });
 

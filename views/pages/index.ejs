@@ -3,14 +3,13 @@
 <head>
 	<% include ../partials/head %>
 </head>
-<body class="container">
-
+<body>
 	<header>
 		<% include ../partials/header %>
 	</header>
 
 	<main>
-		<div id="splash" class="jumbotron">
+		<div id="splash" class="jumbotron" style="padding:20px;">
 			<h1 class="text-center">Finding recipes is EasyPeaZ</h1>
 			<p class="text-center">Just mark what you have currently available and we will show you compatible recipes!</p>
 		</div>
@@ -26,8 +25,8 @@
 				<div class="col-sm-5"></div>
 			</div>
 		</div>
+		<br>
 		<form id="search_recipe">
-			<% include ../partials/ingredient_checkboxes %>
 		</form>
 		<div class="container">
 			<div class="row">
@@ -92,6 +91,33 @@
             xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xmlhttp.send(myJSON);
         }
+
+        var request_ingredient_list = new XMLHttpRequest();
+        request_ingredient_list.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var ingredientsObj = JSON.parse(this.responseText);
+                var search_recipe_form=document.getElementById("search_recipe");
+                var HTML_to_add = "";
+                HTML_to_add+="<br>";
+                HTML_to_add+="<div class=\"row\" style=\"margin-left:7%\">";
+                for(var key in ingredientsObj){
+                    HTML_to_add+=	"<div class=\"col-sm-1\">"+
+										"<table>"+
+                        					"<thead>"+key.toString()+"</thead>"+
+                        					"<tbody>";
+                    for(var i=0;i<ingredientsObj[key].length;i++){
+                        HTML_to_add+="<tr><div class=\"checkbox\"><label><input type=\"checkbox\" name=\""+ingredientsObj[key][i].toLowerCase().replace(" ","_")+"\"> "+ingredientsObj[key][i]+"</label></div></tr>";
+					}
+                    HTML_to_add+=			"</tbody>"+
+                    					"</table>"+
+                    				"</div>";
+                }
+                HTML_to_add+="</div>";
+                search_recipe_form.innerHTML+=HTML_to_add;
+            }
+        };
+        request_ingredient_list.open("GET", "ingredients.json", true);
+        request_ingredient_list.send();
 	</script>
 </body>
 </html>
