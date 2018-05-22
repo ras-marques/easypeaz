@@ -76,15 +76,15 @@
                 HTML_to_add+="<div class=\"row\" style=\"margin-left:7%\">";
                 for(var key in ingredientsObj){
                     HTML_to_add+=	"<div class=\"col-sm-1\">"+
-                        "<table>"+
-                        "<thead>"+key.toString()+"</thead>"+
-                        "<tbody>";
-                    for(var i=0;i<ingredientsObj[key].length;i++){
-                        HTML_to_add+="<tr><div class=\"checkbox\"><label><input type=\"checkbox\" name=\""+ingredientsObj[key][i].toLowerCase().replace(" ","_")+"\"> "+ingredientsObj[key][i]+"</label></div></tr>";
+                        "<div style=\"text-align:center;\">"+key.toString()+"</div>";
+                    if(target==="add_recipe"){
+                        HTML_to_add+="<div><input type=\"text\" class=\"form-control\" id=\""+key.toString()+"\" name=\""+key.toString()+"\" style=\"display: inline;width:80px;\">"+
+                                        "<button id=\"add_"+key.toString().toLowerCase().replace(" ","_")+"\" type=\"button\" class=\"btn btn-default\" onclick=\"addIngredientTo(\'"+key.toString()+"\')\">+</button></div>";
                     }
-                    HTML_to_add+=			"</tbody>"+
-                        "</table>"+
-                        "</div>";
+                    for(var i=0;i<ingredientsObj[key].length;i++){
+                        HTML_to_add+="<div class=\"checkbox\"><label><input type=\"checkbox\" name=\""+ingredientsObj[key][i].toLowerCase().replace(" ","_")+"\">"+ingredientsObj[key][i]+"</label></div>";
+                    }
+                    HTML_to_add+="</div>";
                 }
                 HTML_to_add+="</div>";
                 search_recipe_form.innerHTML+=HTML_to_add;
@@ -108,5 +108,8 @@
         };
         xmlhttp.open("GET", "recipes.json", true);
         xmlhttp.send();
+    }
+    function addIngredientTo(target){
+        console.log(target);
     }
 </script>
