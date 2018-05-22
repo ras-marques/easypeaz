@@ -29,7 +29,7 @@
 			<div class="row">
 				<div class="col-sm-5"></div>
 				<div class="col-sm-2">
-					<button id="search_button" type="button" class="btn btn-default" onclick="addRecipe()">Add recipe</button>
+					<button id="search_button" type="button" class="btn btn-default" onclick="addRecipeFrom('add_recipe')">Add recipe</button>
 				</div>
 				<div class="col-sm-5"></div>
 			</div>
@@ -38,62 +38,9 @@
 	<footer>
 		<% include ../partials/footer %>
 	</footer>
+	<% include ../partials/scripts %>
 	<script>
-        function setAll(checked) {
-            if(checked){
-                $('input:checkbox').not(this).prop('checked', true);
-            }
-            else{
-                $('input:checkbox').not(this).prop('checked', false);
-            }
-        }
-        function addRecipe() {
-            var xmlhttp=new XMLHttpRequest();
-            var url = "add";
-            var checkBoxes_formData = new FormData(document.getElementById("add_recipe"));
-            var checkBoxes_formData_objectified = {};
-            for (var pair of checkBoxes_formData.entries()) {
-                checkBoxes_formData_objectified[pair[0].toString()] = pair[1];
-            }
-            //console.log(checkBoxes_formData_objectified);
-            var myJSON = JSON.stringify(checkBoxes_formData_objectified);
-            //console.log(myJSON);
-            xmlhttp.open("POST",url,true);
-            xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xmlhttp.send(myJSON);
-            alert("Recipe added. Thanks!")
-            setAll(false);
-			document.getElementById("recipe_name").value="";
-            document.getElementById("recipe_link").value="";
-            window.scrollTo(0, 0);
-        }
-
-        var request_ingredient_list = new XMLHttpRequest();
-        request_ingredient_list.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var ingredientsObj = JSON.parse(this.responseText);
-                var search_recipe_form=document.getElementById("add_recipe");
-                var HTML_to_add = "";
-                HTML_to_add+="<br>";
-                HTML_to_add+="<div class=\"row\" style=\"margin-left:7%\">";
-                for(var key in ingredientsObj){
-                    HTML_to_add+=	"<div class=\"col-sm-1\">"+
-                        "<table>"+
-                        "<thead>"+key.toString()+"</thead>"+
-                        "<tbody>";
-                    for(var i=0;i<ingredientsObj[key].length;i++){
-                        HTML_to_add+="<tr><div class=\"checkbox\"><label><input type=\"checkbox\" name=\""+ingredientsObj[key][i].toLowerCase().replace(" ","_")+"\"> "+ingredientsObj[key][i]+"</label></div></tr>";
-                    }
-                    HTML_to_add+=			"</tbody>"+
-                        "</table>"+
-                        "</div>";
-                }
-                HTML_to_add+="</div>";
-                search_recipe_form.innerHTML+=HTML_to_add;
-            }
-        };
-        request_ingredient_list.open("GET", "ingredients.json", true);
-        request_ingredient_list.send();
+        add_ingredient_list_to("add_recipe");
 	</script>
 </body>
 </html>

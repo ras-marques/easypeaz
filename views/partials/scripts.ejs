@@ -1,0 +1,112 @@
+<script>
+    function setAll(checked) {
+        if(checked){
+            $('input:checkbox').not(this).prop('checked', true);
+        }
+        else{
+            $('input:checkbox').not(this).prop('checked', false);
+        }
+    }
+    function postData() {
+        var xmlhttp=new XMLHttpRequest();
+
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var div=document.getElementById("results");
+                div.innerHTML="";
+                var myObj = JSON.parse(this.responseText);
+                console.log(myObj)
+                for(var key in myObj){
+                    div.innerHTML+="<p><a href=\""+myObj[key].recipe_link+"\">"+key+"</a></p>";
+                }
+                var elem = document.getElementById('splash');
+                elem.parentNode.removeChild(elem);
+                var elem = document.getElementById('selectors');
+                elem.parentNode.removeChild(elem);
+                var elem = document.getElementById('search_recipe');
+                elem.parentNode.removeChild(elem);
+                var elem = document.getElementById('search_button');
+                elem.parentNode.removeChild(elem);
+                //document.getElementById("result").innerHTML=xmlhttp.responseText;
+            }
+        }
+
+        var url = "search_result";
+        var checkBoxes_formData = new FormData(document.getElementById("search_recipe"));
+        var checkBoxes_formData_objectified = {};
+        for (var pair of checkBoxes_formData.entries()) {
+            checkBoxes_formData_objectified[pair[0].toString()] = pair[1];
+        }
+        //console.log(checkBoxes_formData_objectified);
+        var myJSON = JSON.stringify(checkBoxes_formData_objectified);
+        //console.log(myJSON);
+        xmlhttp.open("POST",url,true);
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.send(myJSON);
+    }
+    function addRecipeFrom(target) {
+        console.log(target)
+        var xmlhttp = new XMLHttpRequest();
+        var url = "add";
+        var checkBoxes_formData = new FormData(document.getElementById(target));
+        var checkBoxes_formData_objectified = {};
+        for (var pair of checkBoxes_formData.entries()) {
+            checkBoxes_formData_objectified[pair[0].toString()] = pair[1];
+        }
+        //console.log(checkBoxes_formData_objectified);
+        var myJSON = JSON.stringify(checkBoxes_formData_objectified);
+        //console.log(myJSON);
+        xmlhttp.open("POST", url, true);
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.send(myJSON);
+        alert("Recipe added. Thanks!")
+        setAll(false);
+        document.getElementById("recipe_name").value = "";
+        document.getElementById("recipe_link").value = "";
+        window.scrollTo(0, 0);
+    }
+    function add_ingredient_list_to(target){
+        var request_ingredient_list = new XMLHttpRequest();
+        request_ingredient_list.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var ingredientsObj = JSON.parse(this.responseText);
+                var search_recipe_form=document.getElementById(target);
+                var HTML_to_add = "";
+                HTML_to_add+="<br>";
+                HTML_to_add+="<div class=\"row\" style=\"margin-left:7%\">";
+                for(var key in ingredientsObj){
+                    HTML_to_add+=	"<div class=\"col-sm-1\">"+
+                        "<table>"+
+                        "<thead>"+key.toString()+"</thead>"+
+                        "<tbody>";
+                    for(var i=0;i<ingredientsObj[key].length;i++){
+                        HTML_to_add+="<tr><div class=\"checkbox\"><label><input type=\"checkbox\" name=\""+ingredientsObj[key][i].toLowerCase().replace(" ","_")+"\"> "+ingredientsObj[key][i]+"</label></div></tr>";
+                    }
+                    HTML_to_add+=			"</tbody>"+
+                        "</table>"+
+                        "</div>";
+                }
+                HTML_to_add+="</div>";
+                search_recipe_form.innerHTML+=HTML_to_add;
+            }
+        };
+        request_ingredient_list.open("GET", "ingredients.json", true);
+        request_ingredient_list.send();
+    }
+    function show_all(){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var div=document.getElementById("results");
+                div.innerHTML="";
+                var myObj = JSON.parse(this.responseText);
+                //console.log(myObj)
+                for(var key in myObj){
+                    div.innerHTML+="<p><a href=\""+myObj[key].recipe_link+"\">"+key+"</a></p>";
+                }
+            }
+        };
+        xmlhttp.open("GET", "recipes.json", true);
+        xmlhttp.send();
+    }
+</script>
