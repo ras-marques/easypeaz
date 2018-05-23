@@ -78,7 +78,7 @@
                     HTML_to_add+=	"<div class=\"col-sm-1\">"+
                         "<div style=\"text-align:center;\">"+key.toString()+"</div>";
                     if(target==="add_recipe"){
-                        HTML_to_add+="<div><input type=\"text\" class=\"form-control\" id=\""+key.toString()+"\" name=\""+key.toString()+"\" style=\"display: inline;width:80px;\">"+
+                        HTML_to_add+="<div><input type=\"text\" class=\"form-control\" id=\"add"+key.toString()+"\" name=\"add"+key.toString()+"\" style=\"display: inline;width:80px;\">"+
                                         "<button id=\"add_"+key.toString().toLowerCase().replace(" ","_")+"\" type=\"button\" class=\"btn btn-default\" onclick=\"addIngredientTo(\'"+key.toString()+"\')\">+</button></div>";
                     }
                     for(var i=0;i<ingredientsObj[key].length;i++){
@@ -110,6 +110,17 @@
         xmlhttp.send();
     }
     function addIngredientTo(target){
-        console.log(target);
+        var xmlhttp = new XMLHttpRequest();
+        var url = "add_ingredient";
+        var object_to_send={};
+        object_to_send["ingredient_column"]=target.toString();
+        object_to_send["ingredient_name"]=document.getElementById("add"+target).value;
+        var myJSON = JSON.stringify(object_to_send);
+        //console.log(myJSON);
+        xmlhttp.open("POST", url, true);
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.send(myJSON);
+        alert(document.getElementById("add"+target).value + " added to " + target.toString() + ". Thanks!")
+        location.reload();
     }
 </script>

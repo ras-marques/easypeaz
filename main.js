@@ -117,5 +117,41 @@ app.post('/add', function(req, res) {
     });
 });
 
+// add ingredient page
+app.post('/add_ingredient', function(req, res) {
+    var data = req.body;
+    var ingredient_column = data["ingredient_column"];
+    var ingredient_name = data["ingredient_name"];
+    //console.log(ingredient_column+":"+ingredient_name);
+
+    var fs = require('fs');
+    var ingredients;
+    fs.readFile('ingredients.json', 'utf8', function (err, data) {
+        if (err) throw err;
+        ingredients = JSON.parse(data);
+        ingredients_to_write = {};
+        //console.log(ingredients);
+        var new_ingredient_column_array = [];
+        for(var key in ingredients){
+            if(key==ingredient_column){
+                new_ingredient_column_array=ingredients[key];
+                new_ingredient_column_array.push(ingredient_name);
+                ingredients_to_write[key]=new_ingredient_column_array;
+            }
+            else{
+                ingredients_to_write[key]=ingredients[key];
+            }
+        }
+        //console.log(ingredients_to_write);
+        var myJSON = JSON.stringify(ingredients_to_write);
+
+        fs.writeFile("ingredients.json", myJSON, function(err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+    });
+});
+
 app.listen(3000);
 console.log('listening on port 3000');
