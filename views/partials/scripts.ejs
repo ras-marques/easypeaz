@@ -47,6 +47,12 @@
     function addRecipeFrom(target) {
         var xmlhttp = new XMLHttpRequest();
         var url = "add";
+        var recipe_name_input = document.getElementById("recipe_name");
+        var recipe_link_input = document.getElementById("recipe_link");
+        if(recipe_name_input.value=="" || recipe_link_input.value==""){
+            alert("The recipe name and recipe link fields are required!")
+            return;
+        }
         var checkBoxes_formData = new FormData(document.getElementById(target));
         var checkBoxes_formData_objectified = {};
         for (var pair of checkBoxes_formData.entries()) {
@@ -60,8 +66,8 @@
         xmlhttp.send(myJSON);
         alert("Recipe added. Thanks!")
         setAll(false);
-        document.getElementById("recipe_name").value = "";
-        document.getElementById("recipe_link").value = "";
+        recipe_name_input.value = "";
+        recipe_link_input.value = "";
         window.scrollTo(0, 0);
     }
     function add_ingredient_list_to(target){

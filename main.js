@@ -99,7 +99,7 @@ app.post('/add', function(req, res) {
     var new_recipe_link = data.recipe_link;
     var new_recipe_ingredients = [];
     for(var key in data){
-        if(key != "recipe_name" && key != "recipe_link"){
+        if(key != "recipe_name" && key != "recipe_link" && !key.includes("add")){
             new_recipe_ingredients.push(key);
         }
     }
