@@ -45,7 +45,6 @@
         xmlhttp.send(myJSON);
     }
     function addRecipeFrom(target) {
-        console.log(target)
         var xmlhttp = new XMLHttpRequest();
         var url = "add";
         var checkBoxes_formData = new FormData(document.getElementById(target));
@@ -122,5 +121,24 @@
         xmlhttp.send(myJSON);
         alert(document.getElementById("add"+target).value + " added to " + target.toString() + ". Thanks!")
         location.reload();
+    }
+    function sendmailFrom(target) {
+        var xmlhttp = new XMLHttpRequest();
+        var url = "sendmail";
+        var suggestion_formData = new FormData(document.getElementById(target));
+        var suggestion_formData_objectified = {};
+        for (var pair of suggestion_formData.entries()) {
+            suggestion_formData_objectified[pair[0].toString()] = pair[1];
+        }
+        var myJSON = JSON.stringify(suggestion_formData_objectified);
+        xmlhttp.open("POST", url, true);
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.send(myJSON);
+        alert("Suggestion received. Thank you!")
+        setAll(false);
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("suggestions").value = "";
+        window.scrollTo(0, 0);
     }
 </script>
